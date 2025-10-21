@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,69 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* Navbar */
+
+.navbar {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  background-color: chartreuse;
+}
+
+.navbar li {
+  margin-right: 10px;
+  /* display: flex; */
+}
+
+.navbar li.right {
+  /* float: right; */
+  /* align-self: flex-end; */
+  justify-self: flex-end;
+  /* align-items: flex-end; */
+  /* justify-content: flex-end; */
+}
+
+/* number picker menu */
+
+.number-picker {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  width: 15vw;
+  font-size: 1em;
+  /* gap: 0px; */
+  line-height: 1.5em;
+  background-color: cadetblue;
+  margin: auto;
+  text-align: center;
+  /* align-items: center; */
+}
+
+/* gamewindow */
+.game-window {
+  margin: auto;
+  background-color: chocolate;
+  width: 90vw;
+  /* height: 40vw; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  justify-content: space-evenly;
+}
+
+.card {
+  flex-basis: 10%;
+  background-color: aquamarine;
+  width: 10%;
+  /* object-fit: contain; */
+  /* height: auto; */
+
+  /* display: block; */
+  /* margin: 5px; */
+  /* height: auto; */
+  /* aspect-ratio: 2/1; */
 }
