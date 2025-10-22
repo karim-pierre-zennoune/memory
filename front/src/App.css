@@ -69,14 +69,25 @@
   /* gap: 0px; */
   line-height: 1.5em;
   background-color: cadetblue;
-  margin: auto;
+  /* margin: auto; */
   text-align: center;
   /* align-items: center; */
 }
 
+/* wrapper */
+.wrapper {
+  /* margin: auto; */
+  background-color: darkblue;
+  /* text-align: center; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+}
+
 /* gamewindow */
 .game-window {
-  margin: auto;
+  /* margin: auto; */
+  /* margin-left: 0; */
   background-color: chocolate;
   width: 90vw;
   /* height: 40vw; */
@@ -87,6 +98,7 @@
   padding-top: 25px;
   padding-bottom: 25px;
   justify-content: space-evenly;
+  /* justify-self: start; */
 }
 
 .card {

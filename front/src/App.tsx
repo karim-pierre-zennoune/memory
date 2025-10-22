@@ -2,15 +2,15 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import NavBar from "./components/NavBar";
-import NumberPicker from "./components/NumberPicker";
+import Menu from "./components/Menu";
 import GameWindow from "./components/GameWindow";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <NumberPicker />
-      <GameWindow />
+      <Menu />
+      {/* <GameWindow /> */}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
