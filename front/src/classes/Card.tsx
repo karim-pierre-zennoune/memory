@@ -1,6 +1,6 @@
 import Deck from "./Deck";
 
-enum CardState {
+export enum CardState {
   Hidden,
   Visible,
   Paired,
@@ -26,6 +26,10 @@ class Card {
     this.deck = deck;
   }
 
+  public getState(): CardState {
+    return this.state;
+  }
+
   public setHidden() {
     this.state = CardState.Hidden;
   }
@@ -38,7 +42,7 @@ class Card {
     this.state = CardState.Paired;
   }
 
-  public getImagePath() {
+  public getImagePath(): string {
     return this.state === CardState.Hidden ? this.backPath : this.frontPath;
   }
 

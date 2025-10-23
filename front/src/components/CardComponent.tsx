@@ -1,48 +1,27 @@
 import { useState } from "react";
-
-export type CardState = "hidden" | "visible" | "paired";
+import Card, { CardState } from "../classes/Card";
+import Deck from "../classes/Deck";
 
 interface CardProps {
-  cardState: CardState;
-  visibleCount: number;
-  incrementCount: Function;
-  reveal: () => void;
+  key: number;
+  card: Card;
+  handleCardClic: Function;
 }
 
 function CardComponent(props: CardProps) {
-  // const [val, setVal] = useState<CardState>("hidden");
-
-  // function reveal() {
-  //   setVal("visible");
-  // }
-
-  if (props.cardState == "hidden") {
-    return (
-      <img
-        className="card"
-        onClick={props.reveal}
-        src="/assets/img/cards/card_back_red.png"
-        alt=""
-      />
-    );
-  } else if (props.cardState == "visible") {
-    return (
-      <img
-        className="card"
-        src="/assets/img/cards/queen_of_hearts2.png"
-        alt=""
-      />
-    );
-  } else {
-    //if paired, todo change css to grey paired card out
-    return (
-      <img
-        className="card"
-        src="/assets/img/cards/queen_of_hearts2.png"
-        alt=""
-      />
-    );
-  }
+  return (
+    <img
+      className={
+        props.card.getState() === CardState.Paired ? "card paired-fade" : "card"
+      }
+      onClick={() => {
+        props.card.handleClick();
+        props.handleCardClic();
+      }}
+      src={props.card.getImagePath()}
+      alt=""
+    />
+  );
 }
 
 export default CardComponent;

@@ -1,53 +1,52 @@
 import { setConstantValue } from "typescript";
-import CardComponent, { CardState } from "./CardComponent";
-import { useState } from "react";
+import CardComponent from "./CardComponent";
+import { ReactElement, useState } from "react";
+import Deck from "../classes/Deck";
+import Card from "../classes/Card";
+import { GameState } from "./Menu";
 
 interface GameWindowProps {
   quantity: number;
+  gameState: GameState;
+  goScore: Function;
 }
 
 function GameWindow(props: GameWindowProps) {
-  console.log("pwet");
-  const result = [];
-  let qt: number = props.quantity;
-  const [visibleCount, setVisibleCount] = useState<number>(0);
+  const [deck, setDeck] = useState<Deck>(new Deck(props.quantity));
+  const [forceRerender, setForceRerender] = useState(0);
+  // const [isFinished, setIsFinished] = useState(false);
 
-  // const [val, setVal] = useState<CardState>("hidden");
+  let cards: Array<Card> = deck.getDeck();
+  let board: any[] = [];
+  let score = 0;
 
-  function incrementCount() {
-    setVisibleCount(visibleCount + 1);
-  }
-
-  function reveal() {
-    if (visibleCount >= 2) {
-      //too many revealed
-    } else {
+  function handleCardClic() {
+    if (deck.checkGameEnd()) {
+      // setIsFinished(true);
+      props.goScore();
     }
-    // setVal("visible");
+
+    setForceRerender(forceRerender + 1);
+    // setDeck(deck);
   }
 
-  while (qt > 0) {
-    //prepare new card ?
-    result.push(
+  cards.forEach((card) => {
+    board.push(
       <CardComponent
-        cardState="hidden"
-        visibleCount={visibleCount}
-        incrementCount={incrementCount}
-        reveal={reveal}
+        key={card.getId()}
+        card={card}
+        handleCardClic={handleCardClic}
       />
     );
-    result.push(
-      <CardComponent
-        cardState="hidden"
-        visibleCount={visibleCount}
-        incrementCount={incrementCount}
-        reveal={reveal}
-      />
-    );
-    qt--;
-  }
+  });
 
-  return <section className="game-window"> {result}</section>;
+  if (props.gameState === GameState.Score) {
+    return (
+      <section className="game-window"> You Win score is : {score}</section>
+    );
+  } else {
+    return <section className="game-window"> {board}</section>;
+  }
 }
 
 export default GameWindow;
