@@ -2,7 +2,7 @@ function NavBar() {
   return (
     <nav>
       <ul className="navbar">
-        <li>Index</li>
+        <li>Game</li>
         <li>Leaderboards</li>
         <li>Login</li>
         <li>Register</li>

@@ -9,32 +9,29 @@ export enum GameState {
 
 function Menu() {
   const [val, setVal] = useState<number>(6);
-
   const [gameState, setGameState] = useState<GameState>(GameState.Menu);
-  // const [playing, setPlaying] = useState<boolean>(false);
 
-  function increment() {
+  function increment(): void {
     if (val < 12) {
       setVal(val + 1);
     }
   }
 
-  function decrement() {
+  function decrement(): void {
     if (val > 3) {
       setVal(val - 1);
     }
   }
 
-  function goPlay() {
-    // setPlaying(true);
+  function goPlay(): void {
     setGameState(GameState.Play);
   }
 
-  function goMenu() {
+  function goMenu(): void {
     setGameState(GameState.Menu);
   }
 
-  function goScore() {
+  function goScore(): void {
     setGameState(GameState.Score);
   }
 
@@ -44,9 +41,14 @@ function Menu() {
         <section className="wrapper">
           <div className="number-picker">
             <p>Number of Pairs</p>
-            <p>
-              <span onClick={decrement}>◀</span> {val}{" "}
-              <span onClick={increment}>▶</span>
+            <p className="no-select">
+              <span className="arrows" onClick={decrement}>
+                ◀
+              </span>{" "}
+              {val}{" "}
+              <span className="arrows" onClick={increment}>
+                ▶
+              </span>
             </p>
             <button onClick={goPlay}>Start Game</button>
           </div>
@@ -57,28 +59,43 @@ function Menu() {
         <section className="wrapper">
           <div className="number-picker">
             <button onClick={goMenu}>Forfeit</button>
-            <GameWindow
-              quantity={val}
-              gameState={gameState}
-              goScore={goScore}
-            />
           </div>
+          <GameWindow quantity={val} gameState={gameState} goScore={goScore} />
         </section>
       );
     } else {
+      console.log(val);
+
       return (
         <section className="wrapper">
+          <GameWindow quantity={val} gameState={gameState} goScore={goScore} />
           <div className="number-picker">
-            <p>Number of Pairs</p>
-            <p>
-              <span onClick={decrement}>◀</span> {val}{" "}
-              <span onClick={increment}>▶</span>
-            </p>
-            <button onClick={goPlay}>Start Game</button>
-            <GameWindow quantity={0} gameState={gameState} goScore={goScore} />
+            <p>Go back to menu</p>
+
+            <button onClick={goMenu}>Menu</button>
           </div>
         </section>
       );
+
+      // return (
+      //   <section className="wrapper">
+      //     <div className="number-picker">
+      //       <p>Number of Pairs</p>
+      //       <p className="no-select">
+      //         <span className="arrows" onClick={decrement}>
+      //           ◀
+      //         </span>{" "}
+      //         {val}{" "}
+      //         <span className="arrows" onClick={increment}>
+      //           ▶
+      //         </span>
+      //       </p>
+      //       {/* <button onClick={goPlay}>Start Game</button> */}
+      //       <button onClick={goPlay}>Start Game</button>
+      //     </div>
+      //     <GameWindow quantity={val} gameState={gameState} goScore={goScore} />
+      //   </section>
+      // );
     }
   }
 }

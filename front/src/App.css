@@ -9,72 +9,75 @@
 
 .navbar li {
   margin-right: 10px;
-  /* display: flex; */
 }
 
 .navbar li.right {
-  /* float: right; */
-  /* align-self: flex-end; */
   justify-self: flex-end;
-  /* align-items: flex-end; */
-  /* justify-content: flex-end; */
 }
 
 /* number picker menu */
 
+.arrows {
+  cursor: pointer;
+}
+
+.no-select {
+  user-select: none;
+}
+
 .number-picker {
+  margin: auto;
   padding-top: 5px;
   padding-bottom: 10px;
-  width: 15vw;
+  width: 50vw;
   font-size: 1em;
-  /* gap: 0px; */
   line-height: 1.5em;
   background-color: cadetblue;
-  /* margin: auto; */
   text-align: center;
-  /* align-items: center; */
 }
 
 /* wrapper */
 .wrapper {
-  /* margin: auto; */
   background-color: darkblue;
-  /* text-align: center; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
+  margin: auto;
+  width: 90vw;
 }
 
 /* gamewindow */
 .game-window {
-  /* margin: auto; */
-  /* margin-left: 0; */
+  margin: auto;
   background-color: chocolate;
   width: 90vw;
-  /* height: 40vw; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 25px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  gap: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   justify-content: space-evenly;
-  /* justify-self: start; */
 }
 
 .card {
-  flex-basis: 10%;
+  flex-basis: 20%;
   background-color: aquamarine;
   width: 10%;
-  /* object-fit: contain; */
-  /* height: auto; */
-
-  /* display: block; */
-  /* margin: 5px; */
-  /* height: auto; */
-  /* aspect-ratio: 2/1; */
 }
 
 .paired-fade {
   opacity: 0.5;
+}
+
+@media (min-width: 481px) {
+  .game-window {
+    background-color: darkgreen;
+  }
+
+  .number-picker {
+    width: 15vw;
+  }
+
+  .card {
+    flex-basis: 10%;
+    width: 10%;
+  }
 }

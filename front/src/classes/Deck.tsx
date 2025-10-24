@@ -7,12 +7,16 @@ class Deck {
   private currentVisible: Array<Card> = new Array<Card>();
 
   public constructor(pairsQuantity: number) {
+    console.log("construct");
+    console.log("qt" + pairsQuantity);
     this.unpaired = pairsQuantity;
+    let cardImages = this.shuffle(CardNames);
 
     for (let i: number = 0; i < pairsQuantity; i++) {
-      this.deck.push(new Card(CardNames[i], i * 2, i * 2 + 1, this));
-      this.deck.push(new Card(CardNames[i], i * 2 + 1, i * 2, this));
+      this.deck.push(new Card(cardImages[i], i * 2, i * 2 + 1, this));
+      this.deck.push(new Card(cardImages[i], i * 2 + 1, i * 2, this));
     }
+
     this.deck = this.shuffle(this.deck);
   }
 
@@ -30,14 +34,13 @@ class Deck {
 
   public checkGameEnd(): boolean {
     if (this.unpaired === 0) {
-      //game ends. do things
       console.log("win");
       return true;
     }
     return false;
   }
 
-  public shuffle(arr: Array<Card>) {
+  public shuffle(arr: Array<any>): Array<any> {
     let currentIndex = arr.length;
 
     while (currentIndex != 0) {
@@ -60,7 +63,6 @@ class Deck {
       this.unpaired--;
       this.currentVisible.pop();
       this.currentVisible.pop();
-      // this.checkGameEnd();
     } else {
       setTimeout(() => {
         this.currentVisible[0].setHidden();
