@@ -1,3 +1,4 @@
+"use strict";
 import CardNames from "../CardNames";
 import Card from "./Card";
 
@@ -7,8 +8,6 @@ class Deck {
   private currentVisible: Array<Card> = new Array<Card>();
 
   public constructor(pairsQuantity: number) {
-    console.log("construct");
-    console.log("qt" + pairsQuantity);
     this.unpaired = pairsQuantity;
     let cardImages = this.shuffle(CardNames);
 
@@ -34,7 +33,6 @@ class Deck {
 
   public checkGameEnd(): boolean {
     if (this.unpaired === 0) {
-      console.log("win");
       return true;
     }
     return false;

@@ -1,21 +1,40 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Color Theme */
+/* https://www.shecodes.io/palettes/1215#palette */
+
+body {
+  background-color: #1f6f78;
+}
+
+.navbar {
+  background-color: #93e4c1;
+}
+.game-window {
+  background-color: #3baea0;
+}
+
+.wrapper {
+  background-color: #3baea0;
+}
+
 /* Navbar */
 
 .navbar {
+  /* margin-left: 0; */
   list-style: none;
   display: flex;
   flex-direction: row;
-  background-color: chartreuse;
+  justify-content: space-evenly;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
-.navbar li {
-  margin-right: 10px;
-}
-
-.navbar li.right {
-  justify-self: flex-end;
-}
-
-/* number picker menu */
+/* Menu */
 
 .arrows {
   cursor: pointer;
@@ -23,30 +42,38 @@
 
 .no-select {
   user-select: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .number-picker {
   margin: auto;
+  margin-top: 1em;
   padding-top: 5px;
   padding-bottom: 10px;
   width: 50vw;
   font-size: 1em;
   line-height: 1.5em;
-  background-color: cadetblue;
   text-align: center;
+}
+
+button {
+  margin-top: 5px;
+  padding: 5px;
 }
 
 /* wrapper */
 .wrapper {
-  background-color: darkblue;
   margin: auto;
+  margin-top: 1em;
   width: 90vw;
+
+  border-radius: 10px;
 }
 
 /* gamewindow */
 .game-window {
   margin: auto;
-  background-color: chocolate;
   width: 90vw;
   display: flex;
   flex-direction: row;
@@ -55,11 +82,11 @@
   padding-top: 15px;
   padding-bottom: 15px;
   justify-content: space-evenly;
+  border-radius: 10px;
 }
 
 .card {
   flex-basis: 20%;
-  background-color: aquamarine;
   width: 10%;
 }
 
@@ -68,10 +95,6 @@
 }
 
 @media (min-width: 481px) {
-  .game-window {
-    background-color: darkgreen;
-  }
-
   .number-picker {
     width: 15vw;
   }

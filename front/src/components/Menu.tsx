@@ -12,7 +12,7 @@ function Menu() {
   const [gameState, setGameState] = useState<GameState>(GameState.Menu);
 
   function increment(): void {
-    if (val < 12) {
+    if (val < 54) {
       setVal(val + 1);
     }
   }
@@ -64,8 +64,6 @@ function Menu() {
         </section>
       );
     } else {
-      console.log(val);
-
       return (
         <section className="wrapper">
           <GameWindow quantity={val} gameState={gameState} goScore={goScore} />
@@ -76,26 +74,6 @@ function Menu() {
           </div>
         </section>
       );
-
-      // return (
-      //   <section className="wrapper">
-      //     <div className="number-picker">
-      //       <p>Number of Pairs</p>
-      //       <p className="no-select">
-      //         <span className="arrows" onClick={decrement}>
-      //           ◀
-      //         </span>{" "}
-      //         {val}{" "}
-      //         <span className="arrows" onClick={increment}>
-      //           ▶
-      //         </span>
-      //       </p>
-      //       {/* <button onClick={goPlay}>Start Game</button> */}
-      //       <button onClick={goPlay}>Start Game</button>
-      //     </div>
-      //     <GameWindow quantity={val} gameState={gameState} goScore={goScore} />
-      //   </section>
-      // );
     }
   }
 }
