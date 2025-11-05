@@ -20,11 +20,17 @@ public class UserService {
 
     
     public User saveUser(User user) {
+         System.out.println("coucou 3");
         return userRepository.save(user);
     }
 
         public List<User> getUsers() {
-        return userRepository.findAll();
+             System.out.println("coucou dans getUsers service");
+
+            List<User> plop = userRepository.findAll();
+            System.out.println(plop);
+
+        return plop;
     }
 
     
