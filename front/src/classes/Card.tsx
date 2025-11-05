@@ -30,15 +30,15 @@ class Card {
     return this.state;
   }
 
-  public setHidden() {
+  public setHidden(): void {
     this.state = CardState.Hidden;
   }
 
-  public setVisible() {
+  public setVisible(): void {
     this.state = CardState.Visible;
   }
 
-  public setPaired() {
+  public setPaired(): void {
     this.state = CardState.Paired;
   }
 
@@ -54,7 +54,7 @@ class Card {
     return this.pairedId;
   }
 
-  public handleClick() {
+  public handleClick(): void {
     if (
       this.state === CardState.Hidden &&
       this.deck.getCurrentVisibleCount() < 2

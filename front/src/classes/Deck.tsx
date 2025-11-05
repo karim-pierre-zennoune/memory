@@ -9,7 +9,7 @@ class Deck {
 
   public constructor(pairsQuantity: number) {
     this.unpaired = pairsQuantity;
-    let cardImages = this.shuffle(CardNames);
+    let cardImages: Array<string> = this.shuffle(CardNames);
 
     for (let i: number = 0; i < pairsQuantity; i++) {
       this.deck.push(new Card(cardImages[i], i * 2, i * 2 + 1, this));
