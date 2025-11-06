@@ -20,15 +20,14 @@ public class UserService {
 
     
     public User saveUser(User user) {
-         System.out.println("coucou 3");
         return userRepository.save(user);
     }
 
-        public List<User> getUsers() {
-             System.out.println("coucou dans getUsers service");
+    public List<User> getUsers() {
+            //  System.out.println("coucou dans getUsers service");
 
-            List<User> plop = userRepository.findAll();
-            System.out.println(plop);
+        List<User> plop = userRepository.findAll();
+            // System.out.println(plop);
 
         return plop;
     }

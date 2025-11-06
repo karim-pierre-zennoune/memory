@@ -22,33 +22,14 @@ public class UserController {
    // insert a user into database
     @PostMapping("/user")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
-      System.out.println("coucou 1");
       User savedUser = userService.saveUser(user);
-       System.out.println("coucou 2");
+      // return ResponseEntity.status(HttpStatus.CREATED).body(savedUser)
       return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     //get all the users in the table in our database
     @GetMapping("/users")
     public List<User> getUsers() {
-       System.out.println("coucou dans getUsers controller");
         return userService.getUsers();
     }
-
-
-
-
-    //     @PostMapping("/pwet")
-    // public User createrUser() {
-    //     User user = new User();
-    //     user.setLogin("johan");
-    //     user.setPassword("blabla");
-    //     user.setScore(8000);
-    //     // user = userRepo.save(user);
-    //     user =userService.saveUser(user);
-    //     System.out.println(user);
-    //     return user;
-    // }
-
-
 }

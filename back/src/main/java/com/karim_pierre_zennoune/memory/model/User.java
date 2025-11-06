@@ -4,6 +4,9 @@ package com.karim_pierre_zennoune.memory.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
+// import com.karim_pierre_zennoune.memory.model.Score;
 
 
 @Entity
@@ -18,13 +21,10 @@ public class User {
     @Column(name = "login", nullable = false)
     private String login;
 
-    
-
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "score")
-    private int score;
-
+    @OneToMany(mappedBy = "ownerId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Score> scores;
     
 }
