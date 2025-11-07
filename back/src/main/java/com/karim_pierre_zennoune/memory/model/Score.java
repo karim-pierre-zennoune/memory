@@ -1,9 +1,12 @@
 package com.karim_pierre_zennoune.memory.model;
 
+import java.sql.Date;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.Data;
-
-
 
 @Entity
 @Table(name = "scores")
@@ -16,10 +19,14 @@ public class Score {
     @Column(name = "score", nullable = false)
     private long score;
 
-   @ManyToOne
-   @JoinColumn(name = "owner_id", nullable = false, referencedColumnName = "id")
-   private User ownerId;
-//    private long ownerId;
+    @Column(name = "date", nullable = false)
+    private Date date;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    // @JsonIgnoreProperties("scores")
+    @JoinColumn(name = "owner_id", nullable = false, referencedColumnName = "id")
+    private User owner;
+    // private long ownerId;
 
 }
