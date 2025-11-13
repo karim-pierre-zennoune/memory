@@ -15,12 +15,12 @@ import java.util.List;
 @Service
 public class UserService {
 
-    // public UserService(UserRepository userRepo) {
-    // userRepository = userRepo;
+    public UserService(UserRepository userRepo) {
+        userRepository = userRepo;
 
-    // }
+    }
 
-    @Autowired
+    // @Autowired
     private UserRepository userRepository;
 
     public User saveUser(User user) {
@@ -29,10 +29,10 @@ public class UserService {
 
     public ArrayList<UserDto> getUsers() {
         List<User> users = userRepository.findAll();
-        ArrayList<UserDto> usersAsDto = new ArrayList<>();
+        ArrayList<UserDto> usersAsDto = new ArrayList<UserDto>();
 
         for (User user : users) {
-            ArrayList<ScoreDtoForUserJoin> scoresAsDto = new ArrayList<>();
+            ArrayList<ScoreDtoForUserJoin> scoresAsDto = new ArrayList<ScoreDtoForUserJoin>();
             for (Score score : user.getScores()) {
                 ScoreDtoForUserJoin scoreAsDto = new ScoreDtoForUserJoin(score.getScore(), score.getDate());
                 scoresAsDto.add(scoreAsDto);

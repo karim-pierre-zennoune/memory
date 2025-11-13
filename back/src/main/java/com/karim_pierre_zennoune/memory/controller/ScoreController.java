@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDto;
+import com.karim_pierre_zennoune.memory.dto.ScoreDtoForInsert;
 import com.karim_pierre_zennoune.memory.dto.ScoreRespondeDto;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.model.User;
@@ -20,21 +21,13 @@ public class ScoreController {
   private ScoreService scoreService;
 
   @PostMapping("/addscore")
-  public ResponseEntity<Score> saveScore(@RequestBody ScoreDto score) {
-    // public ResponseEntity<Score> saveScore(@RequestBody Score score){
-    // try{
-
+  public ResponseEntity<Score> saveScore(@RequestBody ScoreDtoForInsert score) {
     Score savedScore = scoreService.saveScore(score);
     return new ResponseEntity<>(savedScore, HttpStatus.CREATED);
-    // }
-    // catch (Exception e) {
-    // System.out.println(e);
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
   }
 
   @GetMapping("/scores")
-  public List<ScoreRespondeDto> getScores() {
+  public List<ScoreDto> getScores() {
     System.out.println("in /scores controller");
     return scoreService.getScores();
   }

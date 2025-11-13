@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDto;
+import com.karim_pierre_zennoune.memory.dto.ScoreDtoForInsert;
 import com.karim_pierre_zennoune.memory.dto.ScoreRespondeDto;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.model.User;
@@ -28,7 +29,7 @@ public class ScoreService {
    private final ScoreRepository scoreRepository;
    private final UserRepository userRepository;
 
-   public Score saveScore(ScoreDto scoreDto) {
+   public Score saveScore(ScoreDtoForInsert scoreDto) {
       // System.out.println("print scoreDto");
       // System.out.println(scoreDto);
       Score score = new Score();
@@ -41,13 +42,18 @@ public class ScoreService {
       return scoreRepository.save(score);
    }
 
-   public List<ScoreRespondeDto> getScores() {
+   public List<ScoreDto> getScores() {
 
-      // TODO
       System.out.println("in ScoreService.getScores");
       List<Score> scores = scoreRepository.findAll();
-      // System.out.println(scores);
+      ArrayList<ScoreDto> scoresAsDto = new ArrayList<ScoreDto>();
 
-      return new ArrayList<>();
+      for (Score score : scores) {
+         ScoreDto scoreAsDto = new ScoreDto(score.getScore(), score.getDate(), score.getOwner().getLogin());
+         scoresAsDto.add(scoreAsDto);
+
+      }
+
+      return scoresAsDto;
    }
 }
