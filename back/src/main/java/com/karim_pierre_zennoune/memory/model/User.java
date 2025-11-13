@@ -1,7 +1,13 @@
 package com.karim_pierre_zennoune.memory.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -12,7 +18,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users")
-@Data
+// @Data
+
+@Setter
+@Getter
+// @AllArgsConstructor
+// @NoArgsConstructor
+@RequiredArgsConstructor
+// @ToString
+
 public class User {
 
     @Id
@@ -26,7 +40,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    // @JsonManagedReference
     // @JsonIgnoreProperties("owner")
     private List<Score> scores;
 

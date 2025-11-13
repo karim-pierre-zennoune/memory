@@ -6,11 +6,25 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "scores")
-@Data
+// @Data
+
+@Setter
+@Getter
+// @AllArgsConstructor
+// @NoArgsConstructor
+@RequiredArgsConstructor
+// @ToString
+
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +37,7 @@ public class Score {
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    // @JsonBackReference
     // @JsonIgnoreProperties("scores")
     @JoinColumn(name = "owner_id", nullable = false, referencedColumnName = "id")
     private User owner;

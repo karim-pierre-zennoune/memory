@@ -29,12 +29,12 @@ public class DebugController {
 
     @GetMapping("/adddata")
     public ResponseEntity<Score> addData() {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 5; i++) {
             User user = new User();
             user.setLogin("ka" + i);
             user.setPassword("okokok");
             user = userService.saveUser(user);
-            for (int j = 0; j < 25; j++) {
+            for (int j = 0; j < 3; j++) {
                 ScoreDto scoreDto = new ScoreDto((1000 + j), user.getId(), new Date(System.currentTimeMillis()));
 
                 scoreService.saveScore(scoreDto);

@@ -1,11 +1,13 @@
 package com.karim_pierre_zennoune.memory.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDto;
+import com.karim_pierre_zennoune.memory.dto.ScoreRespondeDto;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.repository.ScoreRepository;
@@ -39,9 +41,13 @@ public class ScoreService {
       return scoreRepository.save(score);
    }
 
-   public List<Score> getScores() {
+   public List<ScoreRespondeDto> getScores() {
 
       // TODO
-      return scoreRepository.findAll();
+      System.out.println("in ScoreService.getScores");
+      List<Score> scores = scoreRepository.findAll();
+      // System.out.println(scores);
+
+      return new ArrayList<>();
    }
 }
