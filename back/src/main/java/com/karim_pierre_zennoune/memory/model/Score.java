@@ -16,14 +16,9 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "scores")
-// @Data
-
 @Setter
 @Getter
-// @AllArgsConstructor
-// @NoArgsConstructor
 @RequiredArgsConstructor
-// @ToString
 
 public class Score {
     @Id
@@ -37,10 +32,6 @@ public class Score {
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    // @JsonBackReference
-    // @JsonIgnoreProperties("scores")
     @JoinColumn(name = "owner_id", nullable = false, referencedColumnName = "id")
     private User owner;
-    // private long ownerId;
-
 }

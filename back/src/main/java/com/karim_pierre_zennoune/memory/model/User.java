@@ -14,18 +14,11 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-// import com.karim_pierre_zennoune.memory.model.Score;
-
 @Entity
 @Table(name = "users")
-// @Data
-
 @Setter
 @Getter
-// @AllArgsConstructor
-// @NoArgsConstructor
 @RequiredArgsConstructor
-// @ToString
 
 public class User {
 
@@ -40,8 +33,6 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    // @JsonManagedReference
-    // @JsonIgnoreProperties("owner")
     private List<Score> scores;
 
 }

@@ -15,23 +15,19 @@ import com.karim_pierre_zennoune.memory.service.UserService;
 @RestController
 public class UserController {
 
-  // public UserController(UserService userServ) {
-  // userService = userServ;
+  public UserController(UserService userServ) {
+    userService = userServ;
 
-  // }
+  }
 
-  @Autowired
   private UserService userService;
 
-  // insert a user into database
   @PostMapping("/user")
   public ResponseEntity<User> saveUser(@RequestBody User user) {
     User savedUser = userService.saveUser(user);
-    // return ResponseEntity.status(HttpStatus.CREATED).body(savedUser)
     return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
   }
 
-  // get all the users in the table in our database
   @GetMapping("/users")
   public ArrayList<UserDto> getUsers() {
     System.out.println("in /users controller");

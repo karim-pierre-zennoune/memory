@@ -43,8 +43,6 @@ public class DebugController {
             }
             System.out.println("added: " + user.getLogin());
         }
-
-        // Score savedScore = scoreService.saveScore(score);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 

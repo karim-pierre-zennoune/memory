@@ -17,7 +17,10 @@ import com.karim_pierre_zennoune.memory.service.ScoreService;
 @RestController
 public class ScoreController {
 
-  @Autowired
+  public ScoreController(ScoreService scoreServ) {
+    scoreService = scoreServ;
+  }
+
   private ScoreService scoreService;
 
   @PostMapping("/addscore")

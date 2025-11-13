@@ -17,7 +17,6 @@ import com.karim_pierre_zennoune.memory.repository.UserRepository;
 import lombok.AllArgsConstructor;
 
 @Service
-// @AllArgsConstructor
 public class ScoreService {
 
    public ScoreService(ScoreRepository scoreRepo, UserRepository userRepo) {
@@ -25,20 +24,15 @@ public class ScoreService {
       userRepository = userRepo;
    }
 
-   // @Autowired
    private final ScoreRepository scoreRepository;
    private final UserRepository userRepository;
 
    public Score saveScore(ScoreDtoForInsert scoreDto) {
-      // System.out.println("print scoreDto");
-      // System.out.println(scoreDto);
       Score score = new Score();
       User user = userRepository.getReferenceById(scoreDto.ownerId());
       score.setOwner(user);
       score.setScore(scoreDto.score());
       score.setDate(scoreDto.date());
-      // System.out.println("print score");
-      // System.out.println(score);
       return scoreRepository.save(score);
    }
 
