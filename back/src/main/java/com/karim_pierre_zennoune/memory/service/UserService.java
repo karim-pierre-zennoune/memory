@@ -4,9 +4,7 @@ import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
 import com.karim_pierre_zennoune.memory.dto.UserDto;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.model.Score;
-import com.karim_pierre_zennoune.memory.repository.ScoreRepository;
 import com.karim_pierre_zennoune.memory.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
