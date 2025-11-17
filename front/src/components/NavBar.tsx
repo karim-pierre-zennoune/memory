@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function NavBar() {
   function testHandleClick() {
     fetch("http://localhost:8080/scores")
@@ -10,11 +12,14 @@ function NavBar() {
   return (
     <nav>
       <ul className="navbar">
-        <li>Game</li>
-        <li>Leaderboards</li>
-        <li>Login</li>
-        <li>Register</li>
-        <li onClick={testHandleClick}>Test</li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/game">Game</NavLink></li>
+        <li><NavLink to="/leaderboards">Leaderboards</NavLink></li>
+        <li><NavLink to="/login">Login</NavLink></li>
+        <li><NavLink to="/register">Register</NavLink></li>
+
+
+        {/* <li onClick={testHandleClick}>Test</li> */}
         <li className="right">Logout</li>
       </ul>
     </nav>

@@ -49,7 +49,7 @@ public class DebugController {
     // public ArrayList<ScoreDto> test() {
     // List<Score> scores = scoreService.findTop10ByScoreDesc();
 
-    // // List<Arcust> findTop25ByArcustnoLessThanOrderByArcustnoDesc(String
+    // List<Arcust> findTop25ByArcustnoLessThanOrderByArcustnoDesc(String
     // arcustno);
 
     // ArrayList<ScoreDto> scoresAsDto = new ArrayList<ScoreDto>();
