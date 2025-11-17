@@ -41,9 +41,23 @@ public class ScoreService {
       for (Score score : scores) {
          ScoreDto scoreAsDto = new ScoreDto(score.getScore(), score.getDate(), score.getOwner().getLogin());
          scoresAsDto.add(scoreAsDto);
-
       }
 
       return scoresAsDto;
+   }
+
+   public List<ScoreDto> getLeaderboard() {
+      System.out.println("in ScoreService.getLeaderboard");
+
+      List<Score> scores = scoreRepository.findTop100ByOrderByScoreDesc();
+      ArrayList<ScoreDto> scoresAsDto = new ArrayList<ScoreDto>();
+
+      for (Score score : scores) {
+         ScoreDto scoreAsDto = new ScoreDto(score.getScore(), score.getDate(), score.getOwner().getLogin());
+         scoresAsDto.add(scoreAsDto);
+      }
+
+      return scoresAsDto;
+
    }
 }

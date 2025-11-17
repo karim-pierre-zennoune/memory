@@ -19,7 +19,7 @@ function NavBar() {
         <li><NavLink to="/register">Register</NavLink></li>
 
 
-        {/* <li onClick={testHandleClick}>Test</li> */}
+        <li onClick={testHandleClick}>Test</li>
         <li className="right">Logout</li>
       </ul>
     </nav>

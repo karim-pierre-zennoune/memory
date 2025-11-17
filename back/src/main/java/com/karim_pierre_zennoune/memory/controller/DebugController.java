@@ -30,11 +30,11 @@ public class DebugController {
     public ResponseEntity<Score> addData() {
         for (int i = 0; i < 20; i++) {
             User user = new User();
-            user.setLogin("ka" + i);
+            user.setLogin("ko" + i);
             user.setPassword("okokok");
             user = userService.saveUser(user);
             for (int j = 0; j < 15; j++) {
-                ScoreDtoForInsert scoreDto = new ScoreDtoForInsert((1000 + j), user.getId(),
+                ScoreDtoForInsert scoreDto = new ScoreDtoForInsert((1000 + j + i), user.getId(),
                         new Date(System.currentTimeMillis()));
 
                 scoreService.saveScore(scoreDto);

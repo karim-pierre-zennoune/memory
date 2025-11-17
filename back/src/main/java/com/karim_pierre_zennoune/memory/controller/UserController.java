@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
 import com.karim_pierre_zennoune.memory.dto.UserDto;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.service.UserService;
@@ -31,4 +32,13 @@ public class UserController {
     System.out.println("in /users controller");
     return userService.getUsers();
   }
+
+  @GetMapping("/userscores")
+  public ArrayList<ScoreDtoForUserJoin> getUserScoresById(@RequestParam long id) {
+    System.out.println("in /userscores controller");
+    return userService.getUserScoresById(id);
+
+    // return new String();
+  }
+
 }

@@ -8,6 +8,7 @@ import com.karim_pierre_zennoune.memory.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -39,6 +40,28 @@ public class UserService {
             usersAsDto.add(userAsDto);
         }
         return usersAsDto;
+    }
+
+    public ArrayList<ScoreDtoForUserJoin> getUserScoresById(long id) {
+        User user = userRepository.findById(id).orElseThrow();
+
+        ArrayList<ScoreDtoForUserJoin> scoresAsDto = new ArrayList<ScoreDtoForUserJoin>();
+        for (Score score : user.getScores()) {
+            ScoreDtoForUserJoin scoreAsDto = new ScoreDtoForUserJoin(score.getScore(), score.getDate());
+            scoresAsDto.add(scoreAsDto);
+        }
+        // scoresAsDto.sort((a,b) -> a.score() - b.score());
+        // scoresAsDto.sort((a, b) -> {
+        // return a.score().compareTo(b.score());
+        // });
+
+        scoresAsDto.sort(Comparator.comparing(o -> o.score()));
+        // todo reeserve
+
+        // scoresAsDto.reversed();
+
+        // cars.sort( (a, b) -> { return -1 * a.compareTo(b); } );
+        return scoresAsDto;
     }
 
 }
