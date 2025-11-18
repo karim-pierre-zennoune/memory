@@ -2,9 +2,13 @@ package com.karim_pierre_zennoune.memory.service;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
 import com.karim_pierre_zennoune.memory.dto.UserDto;
+import com.karim_pierre_zennoune.memory.dto.UserLoginDto;
+import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.repository.UserRepository;
+
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,14 +20,25 @@ public class UserService {
 
     public UserService(UserRepository userRepo) {
         userRepository = userRepo;
-
     }
 
-    // @Autowired
     private UserRepository userRepository;
+    // private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    // public User registerUser(User user) {
+    // user.setPassword(encoder.encode(user.getPassword()));
+    // return userRepository.save(user);
+    // }
+
+    public UserSessionDto loginUser(UserLoginDto user) {
+
+        // TODO
+
+        return null;
     }
 
     public ArrayList<UserDto> getUsers() {
@@ -50,17 +65,8 @@ public class UserService {
             ScoreDtoForUserJoin scoreAsDto = new ScoreDtoForUserJoin(score.getScore(), score.getDate());
             scoresAsDto.add(scoreAsDto);
         }
-        // scoresAsDto.sort((a,b) -> a.score() - b.score());
-        // scoresAsDto.sort((a, b) -> {
-        // return a.score().compareTo(b.score());
-        // });
 
-        scoresAsDto.sort(Comparator.comparing(o -> o.score()));
-        // todo reeserve
-
-        // scoresAsDto.reversed();
-
-        // cars.sort( (a, b) -> { return -1 * a.compareTo(b); } );
+        scoresAsDto.sort(Comparator.comparing(o -> -o.score()));
         return scoresAsDto;
     }
 

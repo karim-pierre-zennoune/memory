@@ -11,7 +11,7 @@ import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <NavBar />
 
       <Routes>
@@ -31,7 +31,7 @@ function App() {
       </Routes>
 
 
-    </div>
+    </>
   );
 }
 

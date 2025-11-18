@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
-  function testHandleClick() {
-    fetch("http://localhost:8080/scores")
-      .then((resp) => resp.json())
-      .then((resp) => console.log(resp))
-      .catch((e) => console.log("something went wrong: " + e))
-  }
+  // function testHandleClick() {
+  //   fetch("http://localhost:8080/scores")
+  //     .then((resp) => resp.json())
+  //     .then((resp) => console.log(resp))
+  //     .catch((e) => console.log("something went wrong: " + e))
+  // }
 
 
   return (
@@ -19,7 +19,7 @@ function NavBar() {
         <li><NavLink to="/register">Register</NavLink></li>
 
 
-        <li onClick={testHandleClick}>Test</li>
+        {/* <li onClick={testHandleClick}>Test</li> */}
         <li className="right">Logout</li>
       </ul>
     </nav>

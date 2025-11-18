@@ -1,7 +1,9 @@
+import LeaderBoard from "../components/LeaderBoard";
+
 function LeaderboardsPage() {
     return (
 
-        <div>Leaderboard page</div>
+        <LeaderBoard />
     );
 }
 
