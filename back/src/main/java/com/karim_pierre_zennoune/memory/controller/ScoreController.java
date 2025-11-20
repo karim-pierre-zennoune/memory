@@ -1,6 +1,5 @@
 package com.karim_pierre_zennoune.memory.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import com.karim_pierre_zennoune.memory.dto.ScoreDtoForInsert;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.service.ScoreService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class ScoreController {

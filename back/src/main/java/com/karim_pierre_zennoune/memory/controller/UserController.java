@@ -45,20 +45,21 @@ public class UserController {
     // return new String();
   }
 
-  // @PostMapping("/register")
-  // public ResponseEntity<User> registerNewUser(@RequestBody User user) {
-  // userService.registerUser(user);
-  // // do not return user (contains password)
-  // return new ResponseEntity<>(null, HttpStatus.CREATED);
-  // }
+  @PostMapping("/register")
+  public ResponseEntity<UserSessionDto> registerNewUser(@RequestBody UserLoginDto user) {
+    User newUser = userService.registerUser(user);
+    // do not return user (contains password)
+    UserSessionDto ret = new UserSessionDto(newUser.getId(), newUser.getLogin());
+    return new ResponseEntity<>(ret, HttpStatus.CREATED);
+  }
 
   @PostMapping("/login")
   public ResponseEntity<UserSessionDto> loginUser(@RequestBody UserLoginDto user) {
     UserSessionDto ret = userService.loginUser(user);
     if (ret == null) {
-      return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+      return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     } else {
-      return new ResponseEntity<>(ret, HttpStatus.CREATED);
+      return new ResponseEntity<>(ret, HttpStatus.OK);
     }
   }
 

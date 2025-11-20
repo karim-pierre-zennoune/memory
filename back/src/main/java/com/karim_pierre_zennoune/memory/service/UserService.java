@@ -29,15 +29,21 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // public User registerUser(User user) {
-    // user.setPassword(encoder.encode(user.getPassword()));
-    // return userRepository.save(user);
-    // }
+    public User registerUser(UserLoginDto user) {
+        // user.setPassword(encoder.encode(user.getPassword()));
 
-    public UserSessionDto loginUser(UserLoginDto user) {
+        User newUser = new User(user);
+        return userRepository.save(newUser);
+    }
 
-        // TODO
-
+    public UserSessionDto loginUser(UserLoginDto userDto) {
+        User user = null;
+        user = userRepository.findByLogin(userDto.login());
+        if (user != null) {
+            if (user.getPassword().equals(userDto.password())) {
+                return new UserSessionDto(user.getId(), user.getLogin());
+            }
+        }
         return null;
     }
 

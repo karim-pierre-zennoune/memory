@@ -11,11 +11,21 @@ interface GameWindowProps {
   goScore: Function;
 }
 
+interface ScoreDtoForInsert {
+  score: number;
+  ownerId: number;
+  date: Date;
+}
+
 function GameWindow(props: GameWindowProps) {
   const [deck, setDeck] = useState<Deck>(new Deck(props.quantity));
   const [forceRerender, setForceRerender] = useState(0);
+  const [error, setError] = useState(null);
+
+
   let cards: Array<Card> = deck.getDeck();
-  let score: number = 0;
+  // let score: number = 0;
+  let score: number = Math.round(Math.random() * 10000);
 
   function handleCardClic() {
     if (deck.checkGameEnd()) {
@@ -25,6 +35,38 @@ function GameWindow(props: GameWindowProps) {
   }
 
   if (props.gameState === GameState.Score) {
+    if (sessionStorage.getItem("id")) {
+      let scoreDto: ScoreDtoForInsert = {
+        score: score,
+        ownerId: Number(sessionStorage.getItem("id")),
+        date: new Date()
+      }
+      //todo post score
+      fetch("http://localhost:8080/addscore", {
+        method: "POST",
+        body: JSON.stringify(scoreDto),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (!res.ok) { console.log("unable to save score"); }
+          else {
+
+            console.log("register OK");
+
+          }
+          // return res.json();
+        })
+        .catch((err) => {
+          setError(err.message);
+          console.log(err.message);
+        })
+
+
+
+    }
+
     return (
       <section className="game-window"> You Win score is : {score}</section>
     );

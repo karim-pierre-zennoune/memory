@@ -33,6 +33,10 @@ body {
   padding-bottom: 7px;
 }
 
+
+.right{
+  background-color: yellow;
+}
 /* Menu */
 
 .arrows {
@@ -116,6 +120,84 @@ tr:nth-child(even) {
 th {
   text-align: left;
 }
+
+
+
+
+
+/* Form */
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive-form {
+  margin: auto;
+  margin-top: 10em;
+  max-width: 450px;
+  width: 100%;
+  border-radius: 4px;
+  border: 2px solid #04aa6d;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+form {
+  margin: auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+label {
+  min-width: 48%;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  min-width: 45%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+textarea {
+  min-width: 45%;
+  height: 150px;
+  margin-bottom: 10px;
+  margin-top: 6em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+input[type="submit"],
+.btn-form {
+  width: 100%;
+  background-color: #04aa6d;
+  color: white;
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+h2{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+
+
 
 
 

@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+import com.karim_pierre_zennoune.memory.dto.UserLoginDto;
+import com.karim_pierre_zennoune.memory.service.UserService;
+
 @Entity
 @Table(name = "users")
 @Setter
@@ -14,6 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class User {
+
+    public User(UserLoginDto userLoginDto) {
+        login = userLoginDto.login();
+        password = userLoginDto.password();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
