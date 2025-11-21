@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.util.List;
 
 import com.karim_pierre_zennoune.memory.dto.UserLoginDto;
-import com.karim_pierre_zennoune.memory.service.UserService;
 
 @Entity
 @Table(name = "users")

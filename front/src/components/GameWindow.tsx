@@ -53,7 +53,7 @@ function GameWindow(props: GameWindowProps) {
           if (!res.ok) { console.log("unable to save score"); }
           else {
 
-            console.log("register OK");
+            console.log("score save OK");
 
           }
           // return res.json();
