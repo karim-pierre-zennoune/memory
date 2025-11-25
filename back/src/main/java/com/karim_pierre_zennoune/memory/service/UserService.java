@@ -2,7 +2,7 @@ package com.karim_pierre_zennoune.memory.service;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
 import com.karim_pierre_zennoune.memory.dto.UserDto;
-import com.karim_pierre_zennoune.memory.dto.UserLoginDto;
+import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.model.Score;
@@ -25,14 +25,14 @@ public class UserService {
     private UserRepository userRepository;
     // private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
-    public User registerUser(UserLoginDto user) {
+    public User registerUser(UserAuthDto user) {
         // user.setPassword(encoder.encode(user.getPassword()));
 
         User newUser = new User(user);
         return userRepository.save(newUser);
     }
 
-    public UserSessionDto loginUser(UserLoginDto userDto) {
+    public UserSessionDto loginUser(UserAuthDto userDto) {
         User user = null;
         user = userRepository.findByLogin(userDto.login());
         if (user != null) {

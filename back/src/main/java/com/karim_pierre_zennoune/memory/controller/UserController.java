@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
-import com.karim_pierre_zennoune.memory.dto.UserLoginDto;
+import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.service.UserService;
@@ -30,14 +30,14 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<UserSessionDto> registerNewUser(@RequestBody UserLoginDto user) {
+  public ResponseEntity<UserSessionDto> registerNewUser(@RequestBody UserAuthDto user) {
     User newUser = userService.registerUser(user);
     UserSessionDto ret = new UserSessionDto(newUser.getId(), newUser.getLogin());
     return new ResponseEntity<>(ret, HttpStatus.CREATED);
   }
 
   @PostMapping("/login")
-  public ResponseEntity<UserSessionDto> loginUser(@RequestBody UserLoginDto user) {
+  public ResponseEntity<UserSessionDto> loginUser(@RequestBody UserAuthDto user) {
     UserSessionDto ret = userService.loginUser(user);
     if (ret == null) {
       return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
