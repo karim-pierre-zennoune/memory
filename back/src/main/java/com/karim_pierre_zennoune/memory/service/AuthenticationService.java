@@ -1,5 +1,7 @@
 package com.karim_pierre_zennoune.memory.service;
 
+import java.util.Optional;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.karim_pierre_zennoune.memory.dto.RegisterUserDto;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
+import com.karim_pierre_zennoune.memory.model.Role;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.repository.UserRepository;
+import com.karim_pierre_zennoune.memory.types.RoleEnum;
 
 /**
  * Service de gestion de l'authentification.
@@ -24,6 +28,7 @@ import com.karim_pierre_zennoune.memory.repository.UserRepository;
 public class AuthenticationService {
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -36,9 +41,11 @@ public class AuthenticationService {
      * @param passwordEncoder       L'encodeur de mots de passe
      * @param authenticationManager Le gestionnaire d'authentification
      */
-    public AuthenticationService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+    public AuthenticationService(UserRepository userRepository, RoleService roleService,
+            PasswordEncoder passwordEncoder,
             AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
     }
@@ -57,9 +64,16 @@ public class AuthenticationService {
      */
     public User signup(UserAuthDto input) {
 
+        Optional<Role> optionalRole = roleService.findByName(RoleEnum.USER);
+
+        if (optionalRole.isEmpty()) {
+            return null;
+        }
+
         User user = new User();
         user.setLogin(input.login());
         user.setPassword(passwordEncoder.encode(input.password()));
+        user.setRole(optionalRole.get());
 
         return userRepository.save(user);
     }

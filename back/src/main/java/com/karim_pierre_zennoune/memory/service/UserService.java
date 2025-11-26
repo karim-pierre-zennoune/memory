@@ -1,29 +1,60 @@
 package com.karim_pierre_zennoune.memory.service;
 
+import com.karim_pierre_zennoune.memory.dto.RegisterUserDto;
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
 import com.karim_pierre_zennoune.memory.dto.UserDto;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.User;
+import com.karim_pierre_zennoune.memory.model.Role;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.repository.UserRepository;
+import com.karim_pierre_zennoune.memory.types.RoleEnum;
 
+import jakarta.annotation.PostConstruct;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
-    public UserService(UserRepository userRepo) {
-        userRepository = userRepo;
+    private final UserRepository userRepository;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepo, RoleService roleServ, PasswordEncoder passwEnc) {
+        this.userRepository = userRepo;
+        this.roleService = roleServ;
+        this.passwordEncoder = passwEnc;
+
     }
 
-    private UserRepository userRepository;
     // private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+    @PostConstruct
+    void init() {
+        UserAuthDto userDto = new UserAuthDto("superadmin", "123456");
+
+        Optional<Role> optionalRole = roleService.findByName(RoleEnum.SUPER_ADMIN);
+        User optionalUser = userRepository.findByLogin(userDto.login());
+
+        if (optionalRole.isEmpty() || optionalUser != null) {
+            return;
+        }
+
+        var user = new User();
+        user.setLogin(userDto.login());
+        user.setPassword(passwordEncoder.encode(userDto.password()));
+        user.setRole(optionalRole.get());
+
+        userRepository.save(user);
+    }
 
     public User registerUser(UserAuthDto user) {
         // user.setPassword(encoder.encode(user.getPassword()));
@@ -70,6 +101,21 @@ public class UserService {
 
         scoresAsDto.sort(Comparator.comparing(o -> -o.score()));
         return scoresAsDto;
+    }
+
+    public User createAdministrator(UserAuthDto input) {
+        Optional<Role> optionalRole = roleService.findByName(RoleEnum.ADMIN);
+
+        if (optionalRole.isEmpty()) {
+            return null;
+        }
+
+        var user = new User();
+        user.setLogin(input.login());
+        user.setPassword(passwordEncoder.encode(input.password()));
+        user.setRole(optionalRole.get());
+
+        return userRepository.save(user);
     }
 
 }

@@ -1,11 +1,14 @@
 package com.karim_pierre_zennoune.memory.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.karim_pierre_zennoune.memory.dto.ScoreDto;
 // import com.karim_pierre_zennoune.memory.dto.ScoreDto;
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForInsert;
 import com.karim_pierre_zennoune.memory.model.Score;
@@ -44,21 +47,11 @@ public class DebugController {
     // return new ResponseEntity<>(null, HttpStatus.CREATED);
     // }
 
-    // @GetMapping("/test")
-    // public ArrayList<ScoreDto> test() {
-    // List<Score> scores = scoreService.findTop10ByScoreDesc();
-
-    // List<Arcust> findTop25ByArcustnoLessThanOrderByArcustnoDesc(String
-    // arcustno);
-
-    // ArrayList<ScoreDto> scoresAsDto = new ArrayList<ScoreDto>();
-    // for (Score score : scores) {
-    // ScoreDto scoreAsDto = new ScoreDto(score.getScore(), score.getDate(),
-    // score.getOwner().getLogin());
-    // scoresAsDto.add(scoreAsDto);
-    // }
-
-    // return scoresAsDto;
-    // }
+    @GetMapping("/test")
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
+    public ArrayList<ScoreDto> test() {
+        ArrayList<ScoreDto> scoresAsDto = new ArrayList<ScoreDto>();
+        return scoresAsDto;
+    }
 
 }
