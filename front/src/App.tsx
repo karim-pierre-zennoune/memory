@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import LeaderboardsPage from "./pages/LeaderboardsPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
 
         <Route path="/" element={< HomePage />} />
         <Route path="/game" element={<GamePage />} />
+
+
+        <Route path="/admin" element={<AdminPage />} />
 
 
 

@@ -92,7 +92,7 @@ public class AuthenticationService {
      * @throws RuntimeException Si l'authentification échoue ou si l'utilisateur
      *                          n'est pas trouvé
      */
-    public UserDetails authenticate(UserAuthDto input) {
+    public User authenticate(UserAuthDto input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         input.login(),

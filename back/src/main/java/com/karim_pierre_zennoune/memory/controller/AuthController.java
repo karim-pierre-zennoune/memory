@@ -1,6 +1,7 @@
 package com.karim_pierre_zennoune.memory.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,12 +74,14 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody UserAuthDto loginUserDto) {
 
-        var authenticatedUser = authenticationService.authenticate(loginUserDto);
+        User authenticatedUser = authenticationService.authenticate(loginUserDto);
+        System.out.println(authenticatedUser.getId());
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
         LoginResponse loginResponse = new LoginResponse().setToken(jwtToken)
-                .setExpiresIn(jwtService.getExpirationTime());
+                .setExpiresIn(jwtService.getExpirationTime()).setLogin(authenticatedUser.getUsername())
+                .setId(authenticatedUser.getId());
 
         return ResponseEntity.ok(loginResponse);
     }

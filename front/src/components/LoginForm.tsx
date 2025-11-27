@@ -4,13 +4,11 @@ import { useNavigate } from "react-router-dom";
 function LoginForm() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-    // const [isLoading, setIsLoading] = useState(false);
-    function handleSubmit(event: any) {
 
+    function handleSubmit(event: any) {
         event.preventDefault();
-        // setIsLoading(true);
         setError(null);
-        fetch("http://localhost:8080/login", {
+        fetch("http://localhost:8080/auth/login", {
             method: "POST",
             body: JSON.stringify({
                 login: event.target[1].value,
@@ -21,13 +19,26 @@ function LoginForm() {
             },
         })
             .then((res) => {
-                // if (!res.ok) throw new Error("Erreur serveur");
-                return res.json();
-            })
-            .then((data) => {
-                sessionStorage.setItem("id", data.id);
-                sessionStorage.setItem("login", data.login);
-                navigate("/");
+                if (res.ok) {
+                    res.json().then((data) => {
+                        // console.log(data.status);
+                        sessionStorage.setItem("id", data.id);
+                        sessionStorage.setItem("login", data.login);
+                        sessionStorage.setItem("token", data.token);
+                        sessionStorage.setItem("expiresIn", data.expiresIn);
+                        navigate("/");
+                    })
+                }
+                else {
+                    if (res.status === 401) {
+                        res.json().then((data) => {
+                            setError(data.description);
+                        })
+                    }
+                    else {
+                        throw new Error("Erreur serveur");
+                    }
+                }
             })
             .catch((err) => {
                 console.log("login catch")
@@ -36,16 +47,14 @@ function LoginForm() {
 
                 setError(err.message)
             })
-        // .finally(() => setIsLoading(false));
     }
-
-
 
     return (
         <div className="responsive-form" onSubmit={handleSubmit}>
             <form action="" method="post">
                 <input type="hidden"></input>
 
+                <p>{error}</p>
                 <label htmlFor="form-login" hidden></label>
                 <input id="form-login" type="text" name="login" placeholder="Login" title="Login" autoComplete="username"
                     autoFocus required></input>

@@ -28,21 +28,4 @@ public class UserController {
   public ResponseEntity<ArrayList<ScoreDtoForUserJoin>> getUserScoresById(@RequestParam long id) {
     return new ResponseEntity<>(userService.getUserScoresById(id), HttpStatus.OK);
   }
-
-  @PostMapping("/register")
-  public ResponseEntity<UserSessionDto> registerNewUser(@RequestBody UserAuthDto user) {
-    User newUser = userService.registerUser(user);
-    UserSessionDto ret = new UserSessionDto(newUser.getId(), newUser.getLogin());
-    return new ResponseEntity<>(ret, HttpStatus.CREATED);
-  }
-
-  @PostMapping("/login")
-  public ResponseEntity<UserSessionDto> loginUser(@RequestBody UserAuthDto user) {
-    UserSessionDto ret = userService.loginUser(user);
-    if (ret == null) {
-      return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
-    } else {
-      return new ResponseEntity<>(ret, HttpStatus.OK);
-    }
-  }
 }

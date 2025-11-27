@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
     const navigate = useNavigate();
-    const [error, setError] = useState(null);
-    // const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        // setIsLoading(true);
-        setError(null);
-        fetch("http://localhost:8080/register", {
+        setError("");
+        if (event.target[2].value !== event.target[3].value) {
+            setError("Password don't match");
+            return;
+        }
+        fetch("http://localhost:8080/auth/signup", {
             method: "POST",
             body: JSON.stringify({
                 login: event.target[1].value,
@@ -21,28 +23,23 @@ function RegisterForm() {
             },
         })
             .then((res) => {
-                // if (!res.ok) throw new Error("Erreur serveur");
-                return res.json();
+                if (res.ok) {
+                    navigate("/login")
+                }
+                else {
+                    throw new Error("Erreur serveur //TODO");
+                }
             })
-            .then((data) => {
-                console.log("register OK");
-                // reset ou redirection
-                navigate("/login");
-            })
+
             .catch((err) => setError(err.message))
-        // .finally(() => setIsLoading(false));
     }
-
-
-
-
 
     return (
         <div className="responsive-form" onSubmit={handleSubmit}>
             <form action="">
 
                 <input type="hidden" />
-
+                <p>{error}</p>
                 <label htmlFor="form-login" hidden></label>
                 <input id="form-login" type="text" name="login" placeholder="Login" title="Login" autoComplete="username"
                     autoFocus required></input>

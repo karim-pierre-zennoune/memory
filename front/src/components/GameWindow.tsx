@@ -47,6 +47,7 @@ function GameWindow(props: GameWindowProps) {
         body: JSON.stringify(scoreDto),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": 'Bearer ' + sessionStorage.getItem("token")
         },
       })
         .then((res) => {

@@ -35,7 +35,7 @@ body {
 
 
 .right{
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 /* Menu */
 
@@ -197,12 +197,17 @@ h2{
 }
 
 
-
+.search-bar{
+  margin: auto;
+  /* background-color: chocolate; */
+}
 
 
 
 
 @media (min-width: 481px) {
+
+
   .number-picker {
     width: 15vw;
   }
@@ -211,4 +216,8 @@ h2{
     flex-basis: 10%;
     width: 10%;
   }
+
+
+
+  
 }

@@ -28,7 +28,12 @@ function LeaderBoard() {
             .finally(() => setIsLoading(false)); // se déclenche quoi qu’il arrive
 
         if (sessionStorage.getItem("id")) {
-            fetch("http://localhost:8080/userscores?id=" + sessionStorage.getItem("id"))
+            fetch("http://localhost:8080/userscores?id=" + sessionStorage.getItem("id"), {
+                method: "GET",
+                headers: {
+                    "Authorization": 'Bearer ' + sessionStorage.getItem("token")
+                }
+            })
                 .then((res) => {
                     if (!res.ok) throw new Error(`Erreur HTTP : ${res.status}`); //vérifie la réponse
                     return res.json(); // transforme le JSON en objet JavaScript si réponse ok
