@@ -21,7 +21,6 @@ function LoginForm() {
             .then((res) => {
                 if (res.ok) {
                     res.json().then((data) => {
-                        // console.log(data.status);
                         sessionStorage.setItem("id", data.id);
                         sessionStorage.setItem("login", data.login);
                         sessionStorage.setItem("token", data.token);

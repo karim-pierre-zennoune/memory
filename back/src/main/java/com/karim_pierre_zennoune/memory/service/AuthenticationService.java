@@ -4,11 +4,9 @@ import java.util.Optional;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.karim_pierre_zennoune.memory.dto.RegisterUserDto;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
 import com.karim_pierre_zennoune.memory.model.Role;
 import com.karim_pierre_zennoune.memory.model.User;

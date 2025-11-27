@@ -6,10 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
-import com.karim_pierre_zennoune.memory.dto.UserDto;
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
-import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.repository.UserRepository;
 import com.karim_pierre_zennoune.memory.types.RoleEnum;

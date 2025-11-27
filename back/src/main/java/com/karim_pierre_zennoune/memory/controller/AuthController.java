@@ -1,14 +1,12 @@
 package com.karim_pierre_zennoune.memory.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karim_pierre_zennoune.memory.dto.LoginResponse;
-import com.karim_pierre_zennoune.memory.dto.RegisterUserDto;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.service.AuthenticationService;

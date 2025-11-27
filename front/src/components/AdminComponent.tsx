@@ -58,22 +58,9 @@ function AdminComponent() {
                             </tbody>
                         </table>
                     </>
-
-
-
-
             }
-
-
         </section>
     </>
-
-
-        // <section className="article-list">
-        //     {articles.map((elem) => (
-        //         <ArticleThumbnail  key={elem.id} image={elem.image} title={elem.title} content={elem.content} createdAt={elem.createdAt } />
-        //     ))}
-        // </section>
     );
 }
 

@@ -1,4 +1,3 @@
-import GameWindow from "../components/GameWindow";
 import Menu from "../components/Menu";
 
 function GamePage() {
@@ -6,6 +5,5 @@ function GamePage() {
         <Menu />
     );
 }
-
 
 export default GamePage;

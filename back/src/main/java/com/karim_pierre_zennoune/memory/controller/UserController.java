@@ -8,9 +8,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
-import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
-import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
-import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.service.UserService;
 
 @RestController

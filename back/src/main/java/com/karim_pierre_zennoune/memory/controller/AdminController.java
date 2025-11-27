@@ -5,13 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.service.AdminService;
-import com.karim_pierre_zennoune.memory.service.JwtService;
 
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

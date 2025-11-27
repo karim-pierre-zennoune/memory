@@ -1,6 +1,6 @@
 "use strict";
 import CardComponent from "./CardComponent";
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import Deck from "../classes/Deck";
 import Card from "../classes/Card";
 import { GameState } from "./Menu";
@@ -57,7 +57,6 @@ function GameWindow(props: GameWindowProps) {
             console.log("score save OK");
 
           }
-          // return res.json();
         })
         .catch((err) => {
           setError(err.message);

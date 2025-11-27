@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Card, { CardState } from "../classes/Card";
-import Deck from "../classes/Deck";
 
 interface CardProps {
   key: number;

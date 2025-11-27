@@ -1,6 +1,5 @@
 package com.karim_pierre_zennoune.memory.service;
 
-import com.karim_pierre_zennoune.memory.dto.RegisterUserDto;
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
 import com.karim_pierre_zennoune.memory.dto.UserDto;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
@@ -14,7 +13,6 @@ import com.karim_pierre_zennoune.memory.types.RoleEnum;
 import jakarta.annotation.PostConstruct;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,7 +34,6 @@ public class UserService {
 
     }
 
-    // private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
     @PostConstruct
     void init() {
         UserAuthDto userDto = new UserAuthDto("superadmin", "123456");
@@ -57,8 +54,6 @@ public class UserService {
     }
 
     public User registerUser(UserAuthDto user) {
-        // user.setPassword(encoder.encode(user.getPassword()));
-
         User newUser = new User(user);
         return userRepository.save(newUser);
     }

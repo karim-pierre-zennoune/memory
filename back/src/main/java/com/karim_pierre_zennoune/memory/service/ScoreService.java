@@ -32,21 +32,6 @@ public class ScoreService {
       return scoreRepository.save(score);
    }
 
-   // public List<ScoreDto> getScores() {
-
-   // System.out.println("in ScoreService.getScores");
-   // List<Score> scores = scoreRepository.findAll();
-   // ArrayList<ScoreDto> scoresAsDto = new ArrayList<ScoreDto>();
-
-   // for (Score score : scores) {
-   // ScoreDto scoreAsDto = new ScoreDto(score.getScore(), score.getDate(),
-   // score.getOwner().getLogin());
-   // scoresAsDto.add(scoreAsDto);
-   // }
-
-   // return scoresAsDto;
-   // }
-
    public List<ScoreDto> getLeaderboard() {
       System.out.println("in ScoreService.getLeaderboard");
 
@@ -59,6 +44,5 @@ public class ScoreService {
       }
 
       return scoresAsDto;
-
    }
 }
