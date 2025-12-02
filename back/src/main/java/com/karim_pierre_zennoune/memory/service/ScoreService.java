@@ -2,6 +2,7 @@ package com.karim_pierre_zennoune.memory.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,8 @@ public class ScoreService {
 
    public Score saveScore(ScoreDtoForInsert scoreDto) {
       Score score = new Score();
-      User user = userRepository.getReferenceById(scoreDto.ownerId());
+      Optional<User> optionalUser = userRepository.getReferenceById(scoreDto.ownerId());
+      User user = optionalUser.orElseThrow();
       score.setOwner(user);
       score.setScore(scoreDto.score());
       score.setDate(scoreDto.date());

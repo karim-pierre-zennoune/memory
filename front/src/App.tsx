@@ -9,6 +9,7 @@ import LeaderboardsPage from "./pages/LeaderboardsPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminPage from "./pages/AdminPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -21,7 +22,22 @@ function App() {
         <Route path="/game" element={<GamePage />} />
 
 
-        <Route path="/admin" element={<AdminPage />} />
+        {/* <Route path="/admin" element={<AdminPage />} /> */}
+
+
+        <Route
+          path="admin"
+          element={
+            <ProtectedRoute
+              redirectPath="/"
+              isAllowed={!!sessionStorage.getItem("id") && (
+                sessionStorage.getItem("role") === "SUPER_ADMIN" ||
+                sessionStorage.getItem("role") === "ADMIN")}
+            >
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
 
 
 
@@ -40,3 +56,6 @@ function App() {
 }
 
 export default App;
+
+
+

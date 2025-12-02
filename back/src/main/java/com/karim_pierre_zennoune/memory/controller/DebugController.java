@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForInsert;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
+import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.service.AuthenticationService;
@@ -34,17 +35,17 @@ public class DebugController {
 
         for (int i = 0; i < 20; i++) {
             UserAuthDto user = new UserAuthDto(param + i, "qwe");
-            User createdUser = authenticationService.signup(user);
+            UserSessionDto createdUser = authenticationService.signup(user);
 
             for (int j = 0; j < 15; j++) {
                 ScoreDtoForInsert scoreDto = new ScoreDtoForInsert((long) (Math.random() * 10000),
-                        createdUser.getId(),
+                        createdUser.id(),
                         new Date(System.currentTimeMillis()));
 
                 scoreService.saveScore(scoreDto);
 
             }
-            System.out.println("added: " + createdUser.getLogin());
+            System.out.println("added: " + createdUser.login());
         }
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }

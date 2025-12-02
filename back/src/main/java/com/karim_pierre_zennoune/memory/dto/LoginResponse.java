@@ -1,9 +1,12 @@
 package com.karim_pierre_zennoune.memory.dto;
 
+import com.karim_pierre_zennoune.memory.model.Role;
+
 public class LoginResponse {
     private String token;
     private String login;
     private long expiresIn;
+    private Role role;
     private long id;
 
     public LoginResponse setId(long id) {
@@ -40,5 +43,14 @@ public class LoginResponse {
     public LoginResponse setExpiresIn(long expiresIn) {
         this.expiresIn = expiresIn;
         return this;
+    }
+
+    public LoginResponse setRole(Role role) {
+        this.role = role;
+        return this;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }

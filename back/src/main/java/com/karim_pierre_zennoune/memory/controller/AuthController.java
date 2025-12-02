@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.karim_pierre_zennoune.memory.dto.LoginResponse;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
+import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.service.AuthenticationService;
 import com.karim_pierre_zennoune.memory.service.JwtService;
@@ -51,8 +52,8 @@ public class AuthController {
      * @return L'utilisateur créé
      */
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody UserAuthDto registerUserDto) {
-        User registeredUser = authenticationService.signup(registerUserDto);
+    public ResponseEntity<UserSessionDto> register(@RequestBody UserAuthDto registerUserDto) {
+        UserSessionDto registeredUser = authenticationService.signup(registerUserDto);
 
         return ResponseEntity.ok(registeredUser);
     }
@@ -79,7 +80,7 @@ public class AuthController {
 
         LoginResponse loginResponse = new LoginResponse().setToken(jwtToken)
                 .setExpiresIn(jwtService.getExpirationTime()).setLogin(authenticatedUser.getUsername())
-                .setId(authenticatedUser.getId());
+                .setId(authenticatedUser.getId()).setRole(authenticatedUser.getRole());
 
         return ResponseEntity.ok(loginResponse);
     }

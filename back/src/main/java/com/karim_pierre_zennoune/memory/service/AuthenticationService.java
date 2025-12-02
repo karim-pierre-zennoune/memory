@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
+import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.Role;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.repository.UserRepository;
@@ -60,7 +61,7 @@ public class AuthenticationService {
      * @param input Les informations d'inscription
      * @return L'utilisateur créé
      */
-    public User signup(UserAuthDto input) {
+    public UserSessionDto signup(UserAuthDto input) {
 
         Optional<Role> optionalRole = roleService.findByName(RoleEnum.USER);
 
@@ -73,7 +74,12 @@ public class AuthenticationService {
         user.setPassword(passwordEncoder.encode(input.password()));
         user.setRole(optionalRole.get());
 
-        return userRepository.save(user);
+        User registeredUser = userRepository.save(user);
+        UserSessionDto userSessionDto = new UserSessionDto(
+                registeredUser.getId(), registeredUser.getLogin());
+
+        return userSessionDto;
+        // return userRepository.save(user);
     }
 
     /**

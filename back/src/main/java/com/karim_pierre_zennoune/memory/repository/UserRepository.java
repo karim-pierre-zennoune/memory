@@ -1,6 +1,7 @@
 package com.karim_pierre_zennoune.memory.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,5 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Long deleteById(long id);
 
-    // User findByUserName(String userName);
+    Optional<User> getReferenceById(long id);
+    // User getReferenceById(long id) throws Exception;
 }

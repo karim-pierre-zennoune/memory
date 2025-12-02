@@ -1,6 +1,6 @@
 function SearchResultRow(props: any) {
 
-    function handleClick() {
+    function handleClickDelete() {
         fetch("http://localhost:8080/admin/delete?id=" + props.id, {
             method: "DELETE",
             headers: {
@@ -19,9 +19,11 @@ function SearchResultRow(props: any) {
         <td>{props.id}</td>
 
         <td>{props.login}</td>
-        <td><button onClick={() => {
-            handleClick();
-        }} >DELETE</button></td>
+        <td>
+            <button onClick={() => {
+                handleClickDelete();
+            }} >DELETE</button>
+        </td>
     </tr>);
 
 

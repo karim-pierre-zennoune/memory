@@ -35,13 +35,11 @@ function AdminComponent() {
 
 
     return (<>
-        <input type="text" className="search-bar" onChange={handleChange} />
+        <input type="text" id="admin-search-bar" onChange={handleChange} />
         <section className="user-list">
-
 
             {
                 result.length == 0 ? message :
-
                     <>
                         <table>
                             <tbody>
