@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.exception.RoleNotFoundException;
 import com.karim_pierre_zennoune.memory.exception.UserNotFoundException;
 import com.karim_pierre_zennoune.memory.exception.WrongTargetException;
@@ -25,7 +26,8 @@ public class RootService {
         this.roleService = roleService;
     }
 
-    public User promoteUserToAdmin(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
+    public UserSessionDto promoteUserToAdmin(long id)
+            throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
 
         User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
 
@@ -35,10 +37,15 @@ public class RootService {
 
         Role adminRole = roleService.findByName(RoleEnum.ADMIN).orElseThrow(() -> new RoleNotFoundException());
         user.setRole(adminRole);
-        return user;
+
+        userRepository.save(user);
+
+        UserSessionDto userAsDto = new UserSessionDto(user.getId(), user.getLogin(), user.getRole().getName().name());
+        return userAsDto;
     }
 
-    public User demoteAdminToUser(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
+    public UserSessionDto demoteAdminToUser(long id)
+            throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
 
         User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
 
@@ -48,10 +55,15 @@ public class RootService {
 
         Role userRole = roleService.findByName(RoleEnum.USER).orElseThrow(() -> new RoleNotFoundException());
         user.setRole(userRole);
-        return user;
+
+        userRepository.save(user);
+
+        UserSessionDto userAsDto = new UserSessionDto(user.getId(), user.getLogin(), user.getRole().getName().name());
+        return userAsDto;
     }
 
-    public User promoteAdminToRoot(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
+    public UserSessionDto promoteAdminToRoot(long id)
+            throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
 
         User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
 
@@ -61,10 +73,15 @@ public class RootService {
 
         Role rootRole = roleService.findByName(RoleEnum.SUPER_ADMIN).orElseThrow(() -> new RoleNotFoundException());
         user.setRole(rootRole);
-        return user;
+
+        userRepository.save(user);
+
+        UserSessionDto userAsDto = new UserSessionDto(user.getId(), user.getLogin(), user.getRole().getName().name());
+        return userAsDto;
     }
 
-    public User demoteRootToAdmin(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
+    public UserSessionDto demoteRootToAdmin(long id)
+            throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
 
         User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
 
@@ -74,7 +91,12 @@ public class RootService {
 
         Role adminRole = roleService.findByName(RoleEnum.ADMIN).orElseThrow(() -> new RoleNotFoundException());
         user.setRole(adminRole);
-        return user;
+
+        userRepository.save(user);
+
+        UserSessionDto userAsDto = new UserSessionDto(user.getId(), user.getLogin(), user.getRole().getName().name());
+        return userAsDto;
+
     }
 
 }

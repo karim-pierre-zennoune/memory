@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminPage from "./pages/AdminPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import RootPage from "./pages/RootPage";
 
 function App() {
   return (
@@ -38,6 +39,22 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="root"
+          element={
+            <ProtectedRoute
+              redirectPath="/"
+              isAllowed={!!sessionStorage.getItem("id") && (
+                sessionStorage.getItem("role") === "SUPER_ADMIN")}
+            >
+              <RootPage />
+            </ProtectedRoute>
+          }
+        />
+
+
+
 
 
 

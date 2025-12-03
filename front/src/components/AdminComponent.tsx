@@ -4,6 +4,7 @@ import SearchResultRow from "./SearchResultRow";
 export interface UserSessionDto {
     id: number;
     login: string;
+    role: string;
 }
 
 function AdminComponent() {
@@ -44,15 +45,17 @@ function AdminComponent() {
                         <table>
                             <tbody>
                                 {
-                                    result!.map((elem: UserSessionDto, index) =>
+                                    result!.map((elem: UserSessionDto, index) => {
+                                        // console.log(elem.role);
 
-                                        <SearchResultRow
+                                        return < SearchResultRow
                                             key={index}
                                             id={elem.id}
                                             login={elem.login}
                                             result={result}
                                             setResult={setResult}
                                         />
+                                    }
                                     )
                                 }
                             </tbody>

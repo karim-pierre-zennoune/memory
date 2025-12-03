@@ -26,7 +26,9 @@ public class AdminService {
         List<User> users = userRepository.findByLoginLikeIgnoreCase("%" + query + "%");
         ArrayList<UserSessionDto> usersAsDto = new ArrayList<UserSessionDto>();
         for (User user : users) {
-            UserSessionDto userAsDto = new UserSessionDto(user.getId(), user.getLogin());
+            UserSessionDto userAsDto = new UserSessionDto(user.getId(), user.getLogin(),
+                    user.getRole().getName().name());
+            // System.out.println(user.getRole().getName().name());
             usersAsDto.add(userAsDto);
         }
         return usersAsDto;

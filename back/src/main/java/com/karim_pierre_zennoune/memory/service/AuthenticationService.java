@@ -76,7 +76,7 @@ public class AuthenticationService {
 
         User registeredUser = userRepository.save(user);
         UserSessionDto userSessionDto = new UserSessionDto(
-                registeredUser.getId(), registeredUser.getLogin());
+                registeredUser.getId(), registeredUser.getLogin(), registeredUser.getRole().getName().name());
 
         return userSessionDto;
         // return userRepository.save(user);

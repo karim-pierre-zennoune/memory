@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;
@@ -35,7 +35,7 @@ public class AdminController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
-    // @CrossOrigin
+    @CrossOrigin
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteUser(long id) {
         System.out.println("alive in delete contro");
