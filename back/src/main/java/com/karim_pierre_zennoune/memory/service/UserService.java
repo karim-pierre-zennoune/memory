@@ -53,37 +53,39 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User registerUser(UserAuthDto user) {
-        User newUser = new User(user);
-        return userRepository.save(newUser);
-    }
+    // public User registerUser(UserAuthDto user) {
+    // User newUser = new User(user);
+    // return userRepository.save(newUser);
+    // }
 
-    public UserSessionDto loginUser(UserAuthDto userDto) {
-        User user = null;
-        user = userRepository.findByLogin(userDto.login());
-        if (user != null) {
-            if (user.getPassword().equals(userDto.password())) {
-                return new UserSessionDto(user.getId(), user.getLogin());
-            }
-        }
-        return null;
-    }
+    // public UserSessionDto loginUser(UserAuthDto userDto) {
+    // User user = null;
+    // user = userRepository.findByLogin(userDto.login());
+    // if (user != null) {
+    // if (user.getPassword().equals(userDto.password())) {
+    // return new UserSessionDto(user.getId(), user.getLogin());
+    // }
+    // }
+    // return null;
+    // }
 
-    public ArrayList<UserDto> getUsers() {
-        List<User> users = userRepository.findAll();
-        ArrayList<UserDto> usersAsDto = new ArrayList<UserDto>();
+    // public ArrayList<UserDto> getUsers() {
+    // List<User> users = userRepository.findAll();
+    // ArrayList<UserDto> usersAsDto = new ArrayList<UserDto>();
 
-        for (User user : users) {
-            ArrayList<ScoreDtoForUserJoin> scoresAsDto = new ArrayList<ScoreDtoForUserJoin>();
-            for (Score score : user.getScores()) {
-                ScoreDtoForUserJoin scoreAsDto = new ScoreDtoForUserJoin(score.getScore(), score.getDate());
-                scoresAsDto.add(scoreAsDto);
-            }
-            UserDto userAsDto = new UserDto(user.getId(), user.getLogin(), scoresAsDto);
-            usersAsDto.add(userAsDto);
-        }
-        return usersAsDto;
-    }
+    // for (User user : users) {
+    // ArrayList<ScoreDtoForUserJoin> scoresAsDto = new
+    // ArrayList<ScoreDtoForUserJoin>();
+    // for (Score score : user.getScores()) {
+    // ScoreDtoForUserJoin scoreAsDto = new ScoreDtoForUserJoin(score.getScore(),
+    // score.getDate());
+    // scoresAsDto.add(scoreAsDto);
+    // }
+    // UserDto userAsDto = new UserDto(user.getId(), user.getLogin(), scoresAsDto);
+    // usersAsDto.add(userAsDto);
+    // }
+    // return usersAsDto;
+    // }
 
     public ArrayList<ScoreDtoForUserJoin> getUserScoresById(long id) {
         User user = userRepository.findById(id).orElseThrow();
@@ -98,19 +100,19 @@ public class UserService {
         return scoresAsDto;
     }
 
-    public User createAdministrator(UserAuthDto input) {
-        Optional<Role> optionalRole = roleService.findByName(RoleEnum.ADMIN);
+    // public User createAdministrator(UserAuthDto input) {
+    // Optional<Role> optionalRole = roleService.findByName(RoleEnum.ADMIN);
 
-        if (optionalRole.isEmpty()) {
-            return null;
-        }
+    // if (optionalRole.isEmpty()) {
+    // return null;
+    // }
 
-        var user = new User();
-        user.setLogin(input.login());
-        user.setPassword(passwordEncoder.encode(input.password()));
-        user.setRole(optionalRole.get());
+    // var user = new User();
+    // user.setLogin(input.login());
+    // user.setPassword(passwordEncoder.encode(input.password()));
+    // user.setRole(optionalRole.get());
 
-        return userRepository.save(user);
-    }
+    // return userRepository.save(user);
+    // }
 
 }

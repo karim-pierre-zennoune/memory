@@ -7,6 +7,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 public class WrongTargetException extends ResponseStatusException {
     public WrongTargetException() {
-        super(HttpStatus.BAD_REQUEST, "Admin promotion only applicable to users");
+        super(HttpStatus.BAD_REQUEST, "This action is not possible on this target");
     }
 }

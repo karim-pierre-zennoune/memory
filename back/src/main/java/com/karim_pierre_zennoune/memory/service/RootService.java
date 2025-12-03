@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.karim_pierre_zennoune.memory.exception.RoleNotFoundException;
 import com.karim_pierre_zennoune.memory.exception.UserNotFoundException;
 import com.karim_pierre_zennoune.memory.exception.WrongTargetException;
 import com.karim_pierre_zennoune.memory.model.Role;
@@ -24,7 +25,7 @@ public class RootService {
         this.roleService = roleService;
     }
 
-    public User promoteUserToAdmin(long id) throws UserNotFoundException, WrongTargetException {
+    public User promoteUserToAdmin(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
 
         User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
 
@@ -32,15 +33,48 @@ public class RootService {
             throw new WrongTargetException();
         }
 
-        Role adminRole = roleService.findByName(RoleEnum.ADMIN).orElseThrow();
-
-        // user.get().setRole(null);
+        Role adminRole = roleService.findByName(RoleEnum.ADMIN).orElseThrow(() -> new RoleNotFoundException());
         user.setRole(adminRole);
         return user;
     }
 
-    // public User promoteAdminToRoot() {
+    public User demoteAdminToUser(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
 
-    // }
+        User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
+
+        if (user.getRole().getName() != RoleEnum.ADMIN) {
+            throw new WrongTargetException();
+        }
+
+        Role userRole = roleService.findByName(RoleEnum.USER).orElseThrow(() -> new RoleNotFoundException());
+        user.setRole(userRole);
+        return user;
+    }
+
+    public User promoteAdminToRoot(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
+
+        User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
+
+        if (user.getRole().getName() != RoleEnum.ADMIN) {
+            throw new WrongTargetException();
+        }
+
+        Role rootRole = roleService.findByName(RoleEnum.SUPER_ADMIN).orElseThrow(() -> new RoleNotFoundException());
+        user.setRole(rootRole);
+        return user;
+    }
+
+    public User demoteRootToAdmin(long id) throws UserNotFoundException, WrongTargetException, RoleNotFoundException {
+
+        User user = userRepository.getReferenceById(id).orElseThrow(() -> new UserNotFoundException());
+
+        if (user.getRole().getName() != RoleEnum.SUPER_ADMIN) {
+            throw new WrongTargetException();
+        }
+
+        Role adminRole = roleService.findByName(RoleEnum.ADMIN).orElseThrow(() -> new RoleNotFoundException());
+        user.setRole(adminRole);
+        return user;
+    }
 
 }

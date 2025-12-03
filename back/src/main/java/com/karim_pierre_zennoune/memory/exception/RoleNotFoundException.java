@@ -1,0 +1,11 @@
+package com.karim_pierre_zennoune.memory.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+public class RoleNotFoundException extends ResponseStatusException {
+    public RoleNotFoundException() {
+        // super("Invalid password", HttpStatus.UNAUTHORIZED, "password");
+        super(HttpStatus.NOT_FOUND, "Role not found");
+    }
+}

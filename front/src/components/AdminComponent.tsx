@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SearchResultRow from "./SearchResultRow";
 
-interface UserSessionDto {
+export interface UserSessionDto {
     id: number;
     login: string;
 }
@@ -50,6 +50,8 @@ function AdminComponent() {
                                             key={index}
                                             id={elem.id}
                                             login={elem.login}
+                                            result={result}
+                                            setResult={setResult}
                                         />
                                     )
                                 }

@@ -22,9 +22,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorDto> handleAllException(Exception ex, HttpServletRequest req) {
         var response = switch (ex) {
+            case WrongTargetException e ->
+                new ErrorDto(e.getStatusCode().value(), e.getMessage());
             case UserNotFoundException e ->
                 new ErrorDto(e.getStatusCode().value(), e.getMessage());
-
+            case RoleNotFoundException e ->
+                new ErrorDto(e.getStatusCode().value(), e.getMessage());
             default -> new ErrorDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Unknown internal server error.");
         };
         return ResponseEntity.status(response.status()).body(response);
