@@ -7,9 +7,11 @@ function RootComponent() {
     const [searchTerm, setSearchTerm] = useState("");
     const [message, setMessage] = useState("Chargement en cour");
 
+    function forcedRefresh() {
+        searchUsers();
+    }
 
-    useEffect(() => {
-
+    function searchUsers() {
         fetch("http://localhost:8080/admin/search?param=" + searchTerm, {
             method: "GET",
             headers: {
@@ -20,7 +22,10 @@ function RootComponent() {
             .then((response) => response.json())
             .then((json) => setResult(json))
             .catch(() => setMessage("ERROR"));
+    }
 
+    useEffect(() => {
+        searchUsers();
     }, [searchTerm]);
 
     function handleChange(event: any) {
@@ -46,6 +51,7 @@ function RootComponent() {
                                             role={elem.role}
                                             result={result}
                                             setResult={setResult}
+                                            forcedRefresh={forcedRefresh}
                                         />
 
                                     )

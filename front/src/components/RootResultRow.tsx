@@ -10,7 +10,6 @@ function RootResultRow(props: any) {
             .then((res) => {
                 if (!res.ok) { throw new Error(`Erreur HTTP : ${res.status}`) }
                 else {
-                    console.log("delete OK");
                     props.setResult(
                         props.result.filter((elem: any) => {
                             return elem.id !== props.id;
@@ -25,9 +24,6 @@ function RootResultRow(props: any) {
 
     function handleClickPromote() {
         let action = props.role === 'ADMIN' ? "promote-admin" : "promote-user";
-
-        console.log(action);
-        console.log(props.id);
         fetch("http://localhost:8080/root/" + action, {
             method: "POST",
             body: JSON.stringify({
@@ -41,11 +37,8 @@ function RootResultRow(props: any) {
             .then((res) => {
                 if (!res.ok) { throw new Error(`Erreur HTTP : ${res.status}`) }
                 else {
-                    // props.setResult(
-                    //     props.result.filter((elem: any) => {
-                    //         return elem.id !== props.id;
-                    //     })
-                    // );
+                    console.log("pwt");
+                    props.forcedRefresh();
                 }
 
             })
@@ -67,11 +60,7 @@ function RootResultRow(props: any) {
             .then((res) => {
                 if (!res.ok) { throw new Error(`Erreur HTTP : ${res.status}`) }
                 else {
-                    // props.setResult(
-                    //     props.result.filter((elem: any) => {
-                    //         return elem.id !== props.id;
-                    //     })
-                    // );
+                    props.forcedRefresh();
                 }
 
             })

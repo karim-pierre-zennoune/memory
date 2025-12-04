@@ -10,7 +10,6 @@ function SearchResultRow(props: any) {
             .then((res) => {
                 if (!res.ok) { throw new Error(`Erreur HTTP : ${res.status}`) }
                 else {
-                    console.log("delete OK");
                     props.setResult(
                         props.result.filter((elem: any) => {
                             return elem.id !== props.id;
