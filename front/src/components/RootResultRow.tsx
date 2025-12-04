@@ -1,3 +1,5 @@
+import toast, { Toaster } from "react-hot-toast";
+
 function RootResultRow(props: any) {
 
     function handleClickDelete() {
@@ -35,9 +37,13 @@ function RootResultRow(props: any) {
             }
         })
             .then((res) => {
-                if (!res.ok) { throw new Error(`Erreur HTTP : ${res.status}`) }
+                if (!res.ok) {
+                    toast.error("Cannot promote further.")
+                    throw new Error(`Erreur HTTP : ${res.status}`);
+                }
                 else {
                     console.log("pwt");
+                    toast.success("Promote successfull.");
                     props.forcedRefresh();
                 }
 
@@ -46,6 +52,12 @@ function RootResultRow(props: any) {
     }
 
     function handleClickDemote() {
+        if (sessionStorage.getItem("id") == props.id) {
+            toast.error("Cannot demote yourself.");
+            return;
+        }
+
+
         let action = props.role === 'ADMIN' ? "demote-admin" : "demote-root";
         fetch("http://localhost:8080/root/" + action, {
             method: "POST",
@@ -58,8 +70,12 @@ function RootResultRow(props: any) {
             }
         })
             .then((res) => {
-                if (!res.ok) { throw new Error(`Erreur HTTP : ${res.status}`) }
+                if (!res.ok) {
+                    toast.error("Cannot demote further.");
+                    throw new Error(`Erreur HTTP : ${res.status}`);
+                }
                 else {
+                    toast.success("Demote successfull.");
                     props.forcedRefresh();
                 }
 
@@ -68,24 +84,30 @@ function RootResultRow(props: any) {
     }
 
 
-    return (<tr>
+    return (
 
-        <td>{props.id}</td>
+        <tr>
 
-        <td>{props.login}</td>
-        <td>
-            <button onClick={() => {
-                handleClickDelete();
-            }} >DEL</button>
-        </td>
-        <td>{props.role}</td>
-        <td><button onClick={() => {
-            handleClickPromote();
-        }}>++</button></td>
-        <td><button onClick={() => {
-            handleClickDemote();
-        }}>--</button></td>
-    </tr>);
+            <td>{props.id}</td>
+
+            <td>{props.login}</td>
+            <td>
+                <button onClick={() => {
+                    handleClickDelete();
+                }} >DEL</button>
+            </td>
+            <td>{props.role}</td>
+            <td><button onClick={() => {
+                handleClickPromote();
+            }}>++</button></td>
+            <td><button onClick={() => {
+                handleClickDemote();
+            }}>--</button></td>
+        </tr>
+
+
+
+    );
 
 
 }

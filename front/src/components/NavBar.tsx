@@ -15,6 +15,19 @@ function NavBar() {
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/game">Game</NavLink></li>
         <li><NavLink to="/leaderboards">Leaderboards</NavLink></li>
+
+        {
+          sessionStorage.getItem("role") === "ADMIN" || sessionStorage.getItem("role") === "SUPER_ADMIN" ?
+            <> <li><NavLink to="/admin">Admin</NavLink></li> </> : <></>
+        }
+
+        {
+          sessionStorage.getItem("role") === "SUPER_ADMIN" ?
+            <> <li><NavLink to="/root">Root</NavLink></li> </> : <></>
+        }
+
+
+
         {
           !sessionStorage.getItem("id") ?
             <> <li><NavLink to="/login">Login</NavLink></li>

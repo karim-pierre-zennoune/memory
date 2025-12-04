@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { UserSessionDto } from "./AdminComponent"
 import RootResultRow from "./RootResultRow";
+import { Toaster } from "react-hot-toast";
 
 function RootComponent() {
     const [result, setResult] = useState([]);
@@ -34,6 +35,10 @@ function RootComponent() {
 
 
     return (<>
+        <Toaster
+            position="top-center"
+            reverseOrder={false}
+        />
         <input type="text" id="admin-search-bar" onChange={handleChange} />
         <section className="user-list">
 
