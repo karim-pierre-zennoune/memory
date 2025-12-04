@@ -1,9 +1,5 @@
 package com.karim_pierre_zennoune.memory.service;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;

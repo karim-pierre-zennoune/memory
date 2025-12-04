@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
+import com.karim_pierre_zennoune.memory.exception.UserNotFoundException;
 import com.karim_pierre_zennoune.memory.model.Role;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.repository.UserRepository;
@@ -102,7 +103,7 @@ public class AuthenticationService {
                         input.login(),
                         input.password()));
 
-        return userRepository.findByLogin(input.login());
+        return userRepository.findByLogin(input.login()).orElseThrow(() -> new UserNotFoundException());
         // .orElseThrow();
     }
 }

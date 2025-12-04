@@ -74,8 +74,6 @@ public class AuthController {
     public ResponseEntity<LoginResponse> authenticate(@RequestBody UserAuthDto loginUserDto) {
 
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
-        System.out.println(authenticatedUser.getId());
-
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
         LoginResponse loginResponse = new LoginResponse().setToken(jwtToken)

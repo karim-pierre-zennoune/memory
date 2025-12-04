@@ -1,7 +1,5 @@
 package com.karim_pierre_zennoune.memory.exception;
 
-import java.net.http.HttpResponse;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 

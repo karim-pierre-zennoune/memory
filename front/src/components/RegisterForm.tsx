@@ -27,11 +27,23 @@ function RegisterForm() {
                     navigate("/login")
                 }
                 else {
-                    throw new Error("Erreur serveur //TODO");
+                    throw new Error("Login unavailable");
                 }
             })
+            // .then(
+            //     (json) => {
+            //         console.log(json);
+            //     }
 
-            .catch((err) => setError(err.message))
+            // )
+            .catch(
+
+
+                (err) => {
+
+                    console.log("caca");
+                    setError(err.message);
+                })
     }
 
     return (

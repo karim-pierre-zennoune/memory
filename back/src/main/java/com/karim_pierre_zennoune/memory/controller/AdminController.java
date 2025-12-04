@@ -29,8 +29,6 @@ public class AdminController {
     @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @GetMapping("/search")
     public ResponseEntity<ArrayList<UserSessionDto>> findUsersByLikeLogin(@RequestParam String param) {
-        System.out.println("search: " + param);
-
         return new ResponseEntity<>(adminService.findUsersByLikeLogin(param), HttpStatus.OK);
     }
 
@@ -38,7 +36,6 @@ public class AdminController {
     @CrossOrigin
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteUser(long id) {
-        System.out.println("alive in delete contro");
         return new ResponseEntity<>(adminService.deleteUser(id), HttpStatus.OK);
     }
 

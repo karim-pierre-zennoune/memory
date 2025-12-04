@@ -1,9 +1,8 @@
 package com.karim_pierre_zennoune.memory.service;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForUserJoin;
-import com.karim_pierre_zennoune.memory.dto.UserDto;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
-import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
+import com.karim_pierre_zennoune.memory.exception.UserNotFoundException;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.model.Role;
 import com.karim_pierre_zennoune.memory.model.Score;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,7 +37,7 @@ public class UserService {
         UserAuthDto userDto = new UserAuthDto("superadmin", "123456");
 
         Optional<Role> optionalRole = roleService.findByName(RoleEnum.SUPER_ADMIN);
-        User optionalUser = userRepository.findByLogin(userDto.login());
+        User optionalUser = userRepository.findByLogin(userDto.login()).orElseThrow(() -> new UserNotFoundException());
 
         if (optionalRole.isEmpty() || optionalUser != null) {
             return;
@@ -88,7 +86,7 @@ public class UserService {
     // }
 
     public ArrayList<ScoreDtoForUserJoin> getUserScoresById(long id) {
-        User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
 
         ArrayList<ScoreDtoForUserJoin> scoresAsDto = new ArrayList<ScoreDtoForUserJoin>();
         for (Score score : user.getScores()) {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.karim_pierre_zennoune.memory.dto.ScoreDto;
 import com.karim_pierre_zennoune.memory.dto.ScoreDtoForInsert;
+import com.karim_pierre_zennoune.memory.exception.UserNotFoundException;
 import com.karim_pierre_zennoune.memory.model.Score;
 import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.repository.ScoreRepository;
@@ -27,7 +28,7 @@ public class ScoreService {
    public Score saveScore(ScoreDtoForInsert scoreDto) {
       Score score = new Score();
       Optional<User> optionalUser = userRepository.getReferenceById(scoreDto.ownerId());
-      User user = optionalUser.orElseThrow();
+      User user = optionalUser.orElseThrow(() -> new UserNotFoundException());
       score.setOwner(user);
       score.setScore(scoreDto.score());
       score.setDate(scoreDto.date());
@@ -35,7 +36,6 @@ public class ScoreService {
    }
 
    public List<ScoreDto> getLeaderboard() {
-      System.out.println("in ScoreService.getLeaderboard");
 
       List<Score> scores = scoreRepository.findTop100ByOrderByScoreDesc();
       ArrayList<ScoreDto> scoresAsDto = new ArrayList<ScoreDto>();

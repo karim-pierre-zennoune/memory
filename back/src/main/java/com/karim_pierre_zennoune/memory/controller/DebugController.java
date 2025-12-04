@@ -11,25 +11,21 @@ import com.karim_pierre_zennoune.memory.dto.ScoreDtoForInsert;
 import com.karim_pierre_zennoune.memory.dto.UserAuthDto;
 import com.karim_pierre_zennoune.memory.dto.UserSessionDto;
 import com.karim_pierre_zennoune.memory.model.Score;
-import com.karim_pierre_zennoune.memory.model.User;
 import com.karim_pierre_zennoune.memory.service.AuthenticationService;
 import com.karim_pierre_zennoune.memory.service.ScoreService;
-import com.karim_pierre_zennoune.memory.service.UserService;
 
 @RestController
+@PreAuthorize("hasRole('SUPER_ADMIN')")
 public class DebugController {
 
-    public DebugController(UserService userServ, ScoreService scoreServ, AuthenticationService authenticationService) {
-        userService = userServ;
+    public DebugController(ScoreService scoreServ, AuthenticationService authenticationService) {
         scoreService = scoreServ;
         this.authenticationService = authenticationService;
     }
 
-    private UserService userService;
     private ScoreService scoreService;
     private final AuthenticationService authenticationService;
 
-    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @GetMapping("/adddata")
     public ResponseEntity<Score> addData(@RequestParam String param) {
 
